@@ -99,6 +99,17 @@ public class TankDriveAutoCircle extends LinearOpMode {
         
         
         // Servo code
+        servo(servo);
+
+        // Display telemetry for debugging
+        telemetry.addData("Button Pressed:", gamepad1.toString() );
+        telemetry.update();
+    }
+}
+
+// Servo function
+public static void servo() {
+    // Servo code
         if(gamepad1.leftBumperWasPressed()) {
             rampUpleft = true;
         }
@@ -113,11 +124,9 @@ public class TankDriveAutoCircle extends LinearOpMode {
         }
         if(rampUpright) {
             position -= INCREMENT;
-            servo.setPosition(position);
         }
         if(rampUpleft) {
             position += INCREMENT;
-            servo.setPosition(position);
         }
         if(position<0){
             position = 0;
@@ -126,15 +135,11 @@ public class TankDriveAutoCircle extends LinearOpMode {
             position = 1;
         }
         if(gamepad1.bWasPressed()){
-            servo.setPosition(1);
+            position = 1;
             
         }
         if(gamepad1.aWasPressed()){
-            servo.setPosition(0);
+            position = 0;
         }
-
-        // Display telemetry for debugging
-        telemetry.addData("Button Pressed:", gamepad1.toString() );
-        telemetry.update();
-    }
+        servo.setPosition(position);
 }
